@@ -9,8 +9,8 @@ const CustomCursor = ({toggleMenu}) => {
     const {cursorType} = useGlobalStateContext()
 
     const [ mousePosition, setMousePosition ] = useState( {
-        x: 400,
-        y: 400
+        x: 10,
+        y: 10
     } )
     
     const onMouseMove = event => {

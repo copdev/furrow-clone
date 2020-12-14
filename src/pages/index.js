@@ -1,5 +1,8 @@
 import React from "react"
+import HomeAbout from "../components/homePage/HomeAbout";
 import HomeBanner from "../components/homePage/HomeBanner"
+import HomeContent from "../components/homePage/HomeContent";
+import HomeFeature from "../components/homePage/HomeFeature";
 import Layout from "../components/layout"
 import { useGlobalStateContext } from '../context/globalContext';
 import { useGlobalDispatchContext } from '../context/globalContext';
@@ -15,9 +18,14 @@ const IndexPage = props => {
     })
   }
 
-  return <Layout>
-    <HomeBanner onCursor={onCursor} />
-  </Layout>
+  return (
+    <Layout>
+      <HomeBanner onCursor={onCursor} />
+      <HomeContent />
+      <HomeFeature onCursor={onCursor} />
+      <HomeAbout onCursor={onCursor} />
+    </Layout>
+  )
 }
 
 export default IndexPage

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 //Styled Components
 import { createGlobalStyle, ThemeProvider } from "styled-components"
 import { normalize } from "styled-normalize"
@@ -13,6 +12,7 @@ import {
   useGlobalStateContext,
   useGlobalDispatchContext,
 } from "../context/globalContext"
+import Footer from "./Footer"
 
 
 const GlobalStyle = createGlobalStyle`
@@ -42,26 +42,27 @@ body {
 const Layout = ({ children }) => {
   const dispatch = useGlobalDispatchContext()
   
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  
+
+  const [ hamburgerPosition, setHamburgerPosition ] = useState( {
+    x: 0,
+    y: 0
+  })
 
   const darkTheme = {
     background: "#000",
     text: "#fff",
-    red: "#ea291e"
+    red: "#ea291e",
+    left: `&{hamburgerPosition.x}px`,
+    top: `&{hamburgerPosition.y}px`,
   }
 
   const lightTheme = {
     background: "#fff",
     text: "#000",
-    red: "#ea291e"
+    red: "#ea291e",
+    left: `&{hamburgerPosition.x}px`,
+    top: `&{hamburgerPosition.y}px`,
   }
 
   
@@ -82,9 +83,10 @@ const Layout = ({ children }) => {
     <ThemeProvider theme={currentTheme === "dark" ? darkTheme : lightTheme}>
       <GlobalStyle />
       <CustomCursor toggleMenu={toggleMenu} />
-      <Header onCursor={ onCursor } toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+      <Header onCursor={ onCursor } toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} hamburgerPosition={hamburgerPosition} setHamburgerPosition={setHamburgerPosition} />
       <Navigation toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} onCursor={onCursor} />
-      <main>{children}</main>
+      <main>{ children }</main>
+      <Footer onCursor={onCursor} />
     </ThemeProvider>
   )
 }

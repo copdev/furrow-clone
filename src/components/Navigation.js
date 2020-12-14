@@ -109,7 +109,8 @@ const Navigation = ({toggleMenu, setToggleMenu, onCursor}) => {
                         
                     </ul>
                 </NavList>
-                <NavFooter></NavFooter>
+                            <NavFooter>
+                </NavFooter>
                 <NavVideos>
                     <motion.div animate={{width: revealVideo.show ? 0 : '100%'}} className="reveal"></motion.div>
                     <div className="video">
